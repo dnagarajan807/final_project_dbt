@@ -14,6 +14,10 @@ SELECT ride_id
 ,ended_at
 ,start_station_name
 ,end_station_name
+,start_lat
+,start_lng
+,end_lat
+,end_lng
 ,start_day
 ,end_day
 FROM dupe_recs
