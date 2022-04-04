@@ -2,11 +2,11 @@ version: 2
 
 sources:
     - name: staging
-      database: shoemaker-datazoomcamp
+      database: de-final-project-walkthrough
       schema: divvy_trips_data
 
       tables:
-        - name: external_divvy_data
+        - name: external_divvy_trips
         - name: divvy_data_partitioned 
 
 
