@@ -11,7 +11,7 @@ SELECT ride_id
 ,date_diff(ended_at, started_at, HOUR) as duration_hrs
 ,start_day
 ,end_day
-FROM {{ source('staging','divvy_data_partitioned')}}
+FROM {{ ref('stg_divvy_trips')}}
 WHERE start_station_name is not null
 and end_station_name is not null
 and date_diff(ended_at, started_at, HOUR) > 18
