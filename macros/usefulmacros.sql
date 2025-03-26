@@ -16,3 +16,10 @@
     start_lat + 1
 
 {%- endmacro %}
+
+{% macro get_region(region_type, city, region) %}
+    CASE 
+        WHEN {{ region_type }} = 'place' THEN {{ city }}
+        ELSE {{ region }}
+    END
+{% endmacro %}
