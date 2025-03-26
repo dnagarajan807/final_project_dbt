@@ -2,83 +2,102 @@ version: 2
 
 sources:
     - name: staging
-      database: de-final-project-walkthrough
-      schema: divvy_trips_data
+      database: omega-byte-447718-e2
+      schema: redfin_housing_market
 
       tables:
-        - name: external_divvy_trips
-        - name: divvy_data_partitioned 
+        - name: staging_national_housing_market_data
+        - name: staging_state_housing_market_data
+        - name: staging_metro_housing_market_data
+        - name: staging_county_housing_market_data
+        - name: staging_city_housing_market_data
 
 
 models:
-    - name: stg_divvy_trips
+    - name: stg_monthly_housing_data_union
       description: >
-        Divvy ride trips from 4/1/2020 through the previous month. Any records with a blank start_station_name
-        or end_station_name have been removed. This model also excludes the columns for start_station_id and 
-        end_station_id.
+        Housing data for each month across various regions in the US from 2012.
       columns:
-          - name: ride_id
-            description: Unique identifier for each Divvy Bike Rental
+          - name: period_begin
+            description: Begin period
+            data_type: date
             tests:
                 - not_null:
                     severity: warn
-          - name: rideable_type 
-            description: > 
-                A code indicating if the rider is a member or paid with credit card
-                member = Divvy Member
-                casual = Paid with Credit Card
-          - name: started_at 
-            description: The date and time when the bike was rented.
-          - name: ended_at 
-            description: The date and time when bike was returned to a docking station.
-          - name: start_station_name
-            description: Name of the docking station the bike was rented from.
-          - name: end_station_name
-            description: Name of the docking station the bike was returned to.
-          - name: start_day
-            description: Day of the week the trip was started on
-          - name: end_day
-            description: Day of the week the trip ended on
-
-    - name: stg_stations
-      description: > 
-        Table containing unique station names.
-      columns:
-          - name: StationName
-            description: Name of the Divvy Bike Station.
+          - name: period_end
+            description: End period
+            data_type: date
             tests:
-              - unique:
-                  severity: warn
-
-    - name: stg_long_rides
-      description: >
-        Table contianing trips where the ended_at datetime is greater than 18 hours from
-        the started_at datetime.
-      columns:
-        - name: ride_id
-          description: Unique identifier for each Divvy Bike Rental
-          tests:
-              - not_null:
-                  severity: warn
-        - name: rideable_type
-          description: test
-        - name: member_casual 
-          description:  
-              A code indicating if the rider is a member or paid with credit card
-              member = Divvy Member
-              casual = Paid with Credit Card
-        - name: started_at 
-          description: The date and time when the bike was rented.
-        - name: ended_at 
-          description: The date and time when bike was returned to a docking station.
-        - name: start_station_name
-          description: Name of the docking station the bike was rented from.
-        - name: end_station_name
-          description: Name of the docking station the bike was returned to.
-        - name: start_day
-          description: Day of the week the trip was started on
-        - name: end_day
-          description: Day of the week the trip ended on
-
+                - not_null:
+                    severity: warn
+          - name: period_duration 
+            data_type: integer
+            description: > 
+                Duration of the period for which the data point is collected
+          - name: region_type 
+            description: Type of the region for which the data point is collected
+            data_type: string
+          - name: region 
+            description: The region name (metro, county, city, state etc)
+            data_type: string
+          - name:	state_code
+            data_type: string
+          - name:	property_type
+            description: Property type description
+            data_type: string
+          - name:	median_sale_price
+            data_type: float
+          - name:	median_sale_price_mom
+            data_type: float
+          - name:	median_sale_price_yoy
+            data_type: float
+          - name:	median_list_price
+            data_type: float
+          - name:	median_list_price_mom
+            data_type: float
+          - name:	median_list_price_yoy
+            data_type: float
+          - name:	homes_sold
+            data_type: float
+          - name:	homes_sold_mom
+            data_type: float
+          - name:	homes_sold_yoy
+            data_type: float
+          - name:	pending_sales
+            data_type: float
+          - name:	pending_sales_mom
+            data_type: float
+          - name:	pending_sales_yoy
+            data_type: float
+          - name:	new_listings
+            data_type: float
+          - name:	new_listings_mom
+            data_type: float
+          - name:	new_listings_yoy
+            data_type: float
+          - name:	inventory
+            data_type: float
+          - name:	inventory_mom
+            data_type: float
+          - name:	inventory_yoy
+            data_type: float
+          - name:	average_sale_to_list
+            data_type: float
+          - name:	average_sale_to_list_mom
+            data_type: float
+          - name:	average_sale_to_list_yoy
+            data_type: float
+          - name:	sold_above_list
+            data_type: float
+          - name:	sold_above_list_mom
+            data_type: float
+          - name:	sold_above_list_yoy
+            data_type: float
+          - name:	off_market_in_two_weeks
+            data_type: float
+          - name:	off_market_in_two_weeks_mom
+            data_type: float
+          - name:	off_market_in_two_weeks_yoy
+            data_type: float
 
 
