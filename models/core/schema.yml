@@ -1,0 +1,131 @@
+version: 2
+
+models:
+    - name: fact_monthly_housing_data
+      description: >
+        Unique Redfin data for housing market for the past 5 years organized for counties across the US
+      columns:
+          - name: month
+            description: Month of the data collection
+            data_type: integer
+          - name: year
+            description: Year of the data collection
+            data_type: integer
+
+          - name: period_begin
+            description: Begin period
+            data_type: date
+            tests:
+                - not_null:
+                    severity: warn
+          - name: period_end
+            description: End period
+            data_type: date
+            tests:
+                - not_null:
+                    severity: warn
+          - name: period_duration 
+            data_type: integer
+            description: > 
+                Duration of the period for which the data point is collected
+          - name: region_type 
+            description: Type of the region for which the data point is collected
+            data_type: string
+          - name: region 
+            description: The region name (metro, county, city, state etc)
+            data_type: string
+          - name:	state_code
+            data_type: string
+          - name:	property_type
+            description: Property type description
+            data_type: string
+          - name:	median_sale_price
+            data_type: float
+          - name:	median_sale_price_mom
+            data_type: float
+          - name:	median_sale_price_yoy
+            data_type: float
+          - name:	median_list_price
+            data_type: float
+          - name:	median_list_price_mom
+            data_type: float
+          - name:	median_list_price_yoy
+            data_type: float
+          - name:	homes_sold
+            data_type: float
+          - name:	homes_sold_mom
+            data_type: float
+          - name:	homes_sold_yoy
+            data_type: float
+          - name:	pending_sales
+            data_type: float
+          - name:	pending_sales_mom
+            data_type: float
+          - name:	pending_sales_yoy
+            data_type: float
+          - name:	new_listings
+            data_type: float
+          - name:	new_listings_mom
+            data_type: float
+          - name:	new_listings_yoy
+            data_type: float
+          - name:	inventory
+            data_type: float
+          - name:	inventory_mom
+            data_type: float
+          - name:	inventory_yoy
+            data_type: float
+          - name:	average_sale_to_list
+            data_type: float
+          - name:	average_sale_to_list_mom
+            data_type: float
+          - name:	average_sale_to_list_yoy
+            data_type: float
+          - name:	sold_above_list
+            data_type: float
+          - name:	sold_above_list_mom
+            data_type: float
+          - name:	sold_above_list_yoy
+            data_type: float
+          - name:	off_market_in_two_weeks
+            data_type: float
+          - name:	off_market_in_two_weeks_mom
+            data_type: float
+          - name:	off_market_in_two_weeks_yoy
+            data_type: float
+
+
+    - name: current_year_housing_data
+      description: > 
+        Aggregated data by month and year for current year
+      columns:
+          - name: month
+          - name: year
+          - name: region_type 
+            description: Type of the region for which the data point is collected
+            data_type: string
+          - name: region 
+            description: The region name (metro, county, city, state etc)
+            data_type: string
+          - name:	state_code
+            data_type: string
+          - name:	property_type
+            description: Property type description
+            data_type: string
+          - name:	median_sale_price
+
+          - name:	median_list_price
+
+          - name:	homes_sold
+
+          - name:	pending_sales
+
+          - name:	new_listings
+
+          - name:	inventory
+
+          - name:	average_sale_to_list
+
+          - name:	sold_above_list
+
+          - name:	off_market_in_two_weeks
